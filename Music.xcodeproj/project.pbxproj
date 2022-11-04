@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		FC0328CC28EE7D46009658A6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0328CB28EE7D46009658A6 /* SettingsTableViewController.swift */; };
 		FC33038128EACE6900169F3A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC33038028EACE6900169F3A /* SearchViewController.swift */; };
+		FC34D32E2912563D007CB0FB /* Music__watchOS_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34D32D2912563D007CB0FB /* Music__watchOS_App.swift */; };
+		FC34D3302912563D007CB0FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34D32F2912563D007CB0FB /* ContentView.swift */; };
+		FC34D3322912563E007CB0FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC34D3312912563E007CB0FB /* Assets.xcassets */; };
+		FC34D3352912563E007CB0FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC34D3342912563E007CB0FB /* Preview Assets.xcassets */; };
+		FC34D33A2912567F007CB0FB /* Music (watchOS) Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = FC34D32B2912563D007CB0FB /* Music (watchOS) Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FC3ECE8228EBA63800CA5C31 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = FC3ECE8128EBA63800CA5C31 /* SDWebImage */; };
 		FC3ECE8828EBA72D00CA5C31 /* YoutubeDL in Frameworks */ = {isa = PBXBuildFile; productRef = FC3ECE8728EBA72D00CA5C31 /* YoutubeDL */; };
 		FC636A7D2754C13900E28C7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC636A7C2754C13900E28C7E /* AppDelegate.swift */; };
@@ -27,9 +32,38 @@
 		FCFD5D9A28EA9B4B00D3473E /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFD5D9928EA9B4B00D3473E /* NowPlayingViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		FC34D33B2912567F007CB0FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC636A712754C13900E28C7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FC34D32A2912563D007CB0FB;
+			remoteInfo = "Music (watchOS) Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FC34D33D2912567F007CB0FB /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				FC34D33A2912567F007CB0FB /* Music (watchOS) Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		FC0328CB28EE7D46009658A6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		FC33038028EACE6900169F3A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		FC34D32B2912563D007CB0FB /* Music (watchOS) Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music (watchOS) Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC34D32D2912563D007CB0FB /* Music__watchOS_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music__watchOS_App.swift; sourceTree = "<group>"; };
+		FC34D32F2912563D007CB0FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FC34D3312912563E007CB0FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FC34D3342912563E007CB0FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FC636A792754C13900E28C7E /* Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Music.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC636A7C2754C13900E28C7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC636A7E2754C13900E28C7E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +83,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FC34D3282912563D007CB0FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FC636A762754C13900E28C7E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -61,11 +102,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC34D32C2912563D007CB0FB /* Music (watchOS) Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				FC34D32D2912563D007CB0FB /* Music__watchOS_App.swift */,
+				FC34D32F2912563D007CB0FB /* ContentView.swift */,
+				FC34D3312912563E007CB0FB /* Assets.xcassets */,
+				FC34D3332912563E007CB0FB /* Preview Content */,
+			);
+			path = "Music (watchOS) Watch App";
+			sourceTree = "<group>";
+		};
+		FC34D3332912563E007CB0FB /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				FC34D3342912563E007CB0FB /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FC34D3392912567F007CB0FB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FC636A702754C13900E28C7E = {
 			isa = PBXGroup;
 			children = (
 				FC636A7B2754C13900E28C7E /* Music */,
+				FC34D32C2912563D007CB0FB /* Music (watchOS) Watch App */,
 				FC636A7A2754C13900E28C7E /* Products */,
+				FC34D3392912567F007CB0FB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				FC636A792754C13900E28C7E /* Music.app */,
+				FC34D32B2912563D007CB0FB /* Music (watchOS) Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,6 +182,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FC34D32A2912563D007CB0FB /* Music (watchOS) Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC34D3382912563E007CB0FB /* Build configuration list for PBXNativeTarget "Music (watchOS) Watch App" */;
+			buildPhases = (
+				FC34D3272912563D007CB0FB /* Sources */,
+				FC34D3282912563D007CB0FB /* Frameworks */,
+				FC34D3292912563D007CB0FB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Music (watchOS) Watch App";
+			productName = "Music (watchOS) Watch App";
+			productReference = FC34D32B2912563D007CB0FB /* Music (watchOS) Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		FC636A782754C13900E28C7E /* Music */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC636A8D2754C13A00E28C7E /* Build configuration list for PBXNativeTarget "Music" */;
@@ -119,10 +206,12 @@
 				FC636A752754C13900E28C7E /* Sources */,
 				FC636A762754C13900E28C7E /* Frameworks */,
 				FC636A772754C13900E28C7E /* Resources */,
+				FC34D33D2912567F007CB0FB /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FC34D33C2912567F007CB0FB /* PBXTargetDependency */,
 			);
 			name = Music;
 			packageProductDependencies = (
@@ -139,9 +228,12 @@
 		FC636A712754C13900E28C7E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					FC34D32A2912563D007CB0FB = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
 					FC636A782754C13900E28C7E = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
@@ -165,11 +257,21 @@
 			projectRoot = "";
 			targets = (
 				FC636A782754C13900E28C7E /* Music */,
+				FC34D32A2912563D007CB0FB /* Music (watchOS) Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FC34D3292912563D007CB0FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC34D3352912563E007CB0FB /* Preview Assets.xcassets in Resources */,
+				FC34D3322912563E007CB0FB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FC636A772754C13900E28C7E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -183,6 +285,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FC34D3272912563D007CB0FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC34D3302912563D007CB0FB /* ContentView.swift in Sources */,
+				FC34D32E2912563D007CB0FB /* Music__watchOS_App.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FC636A752754C13900E28C7E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -205,6 +316,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		FC34D33C2912567F007CB0FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FC34D32A2912563D007CB0FB /* Music (watchOS) Watch App */;
+			targetProxy = FC34D33B2912567F007CB0FB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		FC636A822754C13900E28C7E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -225,6 +344,68 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		FC34D3362912563E007CB0FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Music (watchOS) Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 3UH94N3C87;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Music (watchOS)";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.lucasalward.Music;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lucasalward.Music.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		FC34D3372912563E007CB0FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Music (watchOS) Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 3UH94N3C87;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Music (watchOS)";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.lucasalward.Music;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lucasalward.Music.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
 		FC636A8B2754C13A00E28C7E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -392,6 +573,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FC34D3382912563E007CB0FB /* Build configuration list for PBXNativeTarget "Music (watchOS) Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC34D3362912563E007CB0FB /* Debug */,
+				FC34D3372912563E007CB0FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FC636A742754C13900E28C7E /* Build configuration list for PBXProject "Music" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
