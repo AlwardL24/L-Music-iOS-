@@ -40,20 +40,20 @@
                             <tableViewSection headerTitle="MusicAPI" id="oNB-Dn-8DC">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="E2t-WQ-ULN">
-                                        <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="55.5" width="374" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E2t-WQ-ULN" id="rNE-o8-yyL">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Host" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hsn-mn-jhE">
-                                                    <rect key="frame" x="20" y="11" width="36" height="21.5"/>
+                                                    <rect key="frame" x="20" y="11" width="36" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="https://music.lucasalward.com/api/v1" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9hc-Tz-xxD">
-                                                    <rect key="frame" x="72" y="11" width="282" height="21.5"/>
+                                                    <rect key="frame" x="72" y="11" width="282" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -70,20 +70,20 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="yPf-tU-tVt">
-                                        <rect key="frame" x="20" y="99" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="98.5" width="374" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yPf-tU-tVt" id="6BY-AF-7ZL">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auth Key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvR-Hd-6d8">
-                                                    <rect key="frame" x="20" y="11" width="68" height="21.5"/>
+                                                    <rect key="frame" x="20" y="11" width="68" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0000000000000000" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cCU-TJ-FbC">
-                                                    <rect key="frame" x="104" y="11" width="250" height="21.5"/>
+                                                    <rect key="frame" x="104" y="11" width="250" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -100,7 +100,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="43" id="Hpb-0u-CHp">
-                                        <rect key="frame" x="20" y="142.5" width="374" height="43"/>
+                                        <rect key="frame" x="20" y="141.5" width="374" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hpb-0u-CHp" id="MKP-Rb-meW">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="43"/>
@@ -132,20 +132,20 @@
                                 <string key="footerTitle">Recommended. Browse and Search will be disabled when connected to Mobile Data. Download songs before disconnecting from Wi-Fi to play. Song streaming uses a large amount of data.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="nbX-J4-xiY">
-                                        <rect key="frame" x="20" y="249" width="374" height="43.5"/>
+                                        <rect key="frame" x="20" y="248" width="374" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nbX-J4-xiY" id="led-uf-QRM">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go Offline When on Mobile Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qB-12-PHb">
-                                                    <rect key="frame" x="20" y="11" width="245" height="21.5"/>
+                                                    <rect key="frame" x="20" y="11" width="245" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOA-fv-d5L">
-                                                    <rect key="frame" x="305" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="305" y="6" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="dataSaverSwitchToggled:" destination="4GC-Yd-Crt" eventType="valueChanged" id="VQZ-jo-Q0i"/>
                                                     </connections>
@@ -988,7 +988,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="249" image="musicCoverImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="3Zs-3v-lEO">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="249" image="musicCoverImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="3Zs-3v-lEO">
                                 <rect key="frame" x="70" y="86" width="274" height="274"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="3Zs-3v-lEO" secondAttribute="height" multiplier="1:1" id="DoW-fd-Yx7"/>
@@ -1045,7 +1045,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" image="pause.circle.fill" catalog="system">
+                                <state key="normal" image="pause.fill" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                 </state>
                                 <connections>
@@ -1120,7 +1120,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" image="play.circle.fill" catalog="system">
+                                <state key="normal" image="play.fill" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="40"/>
                                 </state>
                                 <connections>
@@ -1289,6 +1289,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addToPlaylistButton" destination="41u-YD-S3L" id="oUj-ya-DOk"/>
+                        <outlet property="baseSongImageView" destination="3Zs-3v-lEO" id="h33-Yo-ede"/>
                         <outlet property="dislikeButton" destination="ZYt-m3-wD9" id="0lc-x5-hO1"/>
                         <outlet property="dismissBarButtonItem" destination="74i-yQ-nbp" id="K1q-Fs-fj1"/>
                         <outlet property="likeButton" destination="q1M-ap-kId" id="cu9-jk-ZHE"/>
@@ -1298,7 +1299,6 @@
                         <outlet property="songArtistLabel" destination="h7a-sM-vVm" id="9Xk-FM-WD5"/>
                         <outlet property="songBack15Button" destination="bGU-Cb-3km" id="cZg-Wd-noE"/>
                         <outlet property="songForward15Button" destination="Z3P-ax-Lqd" id="qW7-TH-MMj"/>
-                        <outlet property="songImageView" destination="3Zs-3v-lEO" id="3Yc-1T-0hr"/>
                         <outlet property="songNextTrackButton" destination="j11-h2-osH" id="9rb-2r-D33"/>
                         <outlet property="songPauseButton" destination="IBJ-5l-2Vh" id="4VS-gY-jN4"/>
                         <outlet property="songPlayButton" destination="h41-z3-4HH" id="IIV-Z7-QWQ"/>
@@ -1543,16 +1543,16 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9c-2e-6Cl">
-                                <rect key="frame" x="145" y="399" width="124.5" height="40"/>
+                                <rect key="frame" x="145" y="399" width="124.5" height="40.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MXI-zy-2Ft">
-                                        <rect key="frame" x="10" y="10" width="104.5" height="20"/>
+                                        <rect key="frame" x="10" y="10" width="104.5" height="20.5"/>
                                         <subviews>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="xWW-tl-qfk">
-                                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="20" height="20.5"/>
                                             </activityIndicatorView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NLt-Xp-AlW">
-                                                <rect key="frame" x="30" y="0.0" width="74.5" height="20"/>
+                                                <rect key="frame" x="30" y="0.0" width="74.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -1623,9 +1623,7 @@
         <image name="music.note.house" catalog="system" width="128" height="104"/>
         <image name="music.note.list" catalog="system" width="128" height="115"/>
         <image name="musicCoverImagePlaceholder" width="600" height="600"/>
-        <image name="pause.circle.fill" catalog="system" width="128" height="123"/>
         <image name="pause.fill" catalog="system" width="117" height="128"/>
-        <image name="play.circle.fill" catalog="system" width="128" height="123"/>
         <image name="play.fill" catalog="system" width="117" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="text.bubble" catalog="system" width="128" height="110"/>

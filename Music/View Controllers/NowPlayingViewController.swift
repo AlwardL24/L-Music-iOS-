@@ -19,7 +19,9 @@ class NowPlayingViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
-    @IBOutlet weak var songImageView: UIImageView!
+    @IBOutlet weak var baseSongImageView: UIImageView!
+    //@IBOutlet weak var songImageView: UIImageView!
+    var songImageViews: [(String, UIImageView)] = []
     @IBOutlet weak var songTitleLabel: UILabel!
     @IBOutlet weak var songArtistLabel: UILabel!
     @IBOutlet weak var songPlaybackTimeSlider: UISlider!
@@ -37,9 +39,48 @@ class NowPlayingViewController: UIViewController {
     @IBOutlet weak var songNextTrackButton: UIButton!
     
     @IBAction func songPreviousTrackButtonPressed(_ sender: Any) {
-        if MusicAPI.shared.canGoPreviousTrack() {
-            MusicAPI.shared.previousTrack()
+        var previousSongImageViewIndex = songImageViews.firstIndex(where: { $0.0 == "previous" })
+        self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 30, delay: 0) {
+            print("ABS:", self.view.constraints.filter({ constraint in
+                if let firstItem = constraint.firstItem as? UIView, firstItem == self.songImageViews[previousSongImageViewIndex!].1 {
+                    return true
+                }
+                if let secondItem = constraint.secondItem as? UIView, secondItem == self.songImageViews[previousSongImageViewIndex!].1 {
+                    return true
+                }
+                return false
+            }))
+            NSLayoutConstraint.deactivate(self.view.constraints.filter({ constraint in
+                if let firstItem = constraint.firstItem as? UIView, firstItem == self.songImageViews[previousSongImageViewIndex!].1 {
+                    return true
+                }
+                if let secondItem = constraint.secondItem as? UIView, secondItem == self.songImageViews[previousSongImageViewIndex!].1 {
+                    return true
+                }
+                return false
+            }))
+            print("ABS:", self.view.constraints.filter({ constraint in
+                if let firstItem = constraint.firstItem as? UIView, firstItem == self.songImageViews[previousSongImageViewIndex!].1 {
+                    return true
+                }
+                if let secondItem = constraint.secondItem as? UIView, secondItem == self.songImageViews[previousSongImageViewIndex!].1 {
+                    return true
+                }
+                return false
+            }))
+            self.songImageViews[previousSongImageViewIndex!].1.translatesAutoresizingMaskIntoConstraints = false
+            self.songImageViews[previousSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[previousSongImageViewIndex!].1.heightAnchor).isActive = true
+            self.songImageViews[previousSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor).isActive = true
+            self.songImageViews[previousSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor).isActive = true
+            self.songImageViews[previousSongImageViewIndex!].1.leadingAnchor.constraint(equalTo: self.baseSongImageView.leadingAnchor).isActive = true
+            self.songImageViews[previousSongImageViewIndex!].1.trailingAnchor.constraint(equalTo: self.baseSongImageView.trailingAnchor).isActive = true
+            self.view.layoutIfNeeded()
         }
+        
+        /*if MusicAPI.shared.canGoPreviousTrack() {
+            MusicAPI.shared.previousTrack()
+        }*/
     }
     @IBAction func songBack15ButtonPressed(_ sender: Any) {
         MusicAPI.shared.seek(to: MusicAPI.shared.getPlaybackTimeSeconds() - 15)
@@ -148,10 +189,13 @@ class NowPlayingViewController: UIViewController {
     }
     
     func updateColors(for image: UIImage) {
+        guard !animatingTrackPan else { return }
         DispatchQueue.main.async {
             guard let averageColor = image.averageColor else { return }
 
-            self.view.backgroundColor = averageColor
+            UIView.animate(withDuration: 0.25) {
+                self.view.backgroundColor = averageColor
+            }
             
             self.foregroundColor = averageColor.isDarkColor ? UIColor(named: "lightNowPlayingForeground") : .init(named: "darkNowPlayingForeground")//UIColor.white : .black
             let secondaryColor = averageColor.isDarkColor ? UIColor(named: "lightNowPlayingSecondary") : .init(named: "darkNowPlayingSecondary")
@@ -189,8 +233,441 @@ class NowPlayingViewController: UIViewController {
         }
     }
     
+    func updateColors(for averageColor: UIColor) {
+        self.view.backgroundColor = averageColor
+        /*
+        self.foregroundColor = averageColor.isDarkColor ? UIColor(named: "lightNowPlayingForeground") : .init(named: "darkNowPlayingForeground")//UIColor.white : .black
+        let secondaryColor = averageColor.isDarkColor ? UIColor(named: "lightNowPlayingSecondary") : .init(named: "darkNowPlayingSecondary")
+        
+        self.songTitleLabel.textColor = self.foregroundColor
+        self.songArtistLabel.textColor = self.foregroundColor
+        self.songPlaybackTimeSlider.minimumTrackTintColor = self.foregroundColor
+        self.songPlaybackTimeSlider.thumbTintColor = self.foregroundColor
+        self.songPlaybackTimeElapsedLabel.textColor = self.foregroundColor
+        self.songPreviousTrackButton.tintColor = self.foregroundColor
+        self.songNextTrackButton.tintColor = self.foregroundColor
+        self.songBack15Button.tintColor = self.foregroundColor
+        self.songForward15Button.tintColor = self.foregroundColor
+        self.songPauseButton.tintColor = self.foregroundColor
+        self.songPlayButton.tintColor = self.foregroundColor
+        
+        self.upNextTitleLabel.textColor = self.foregroundColor
+        self.upNextArtistLabel.textColor = self.foregroundColor
+        
+        self.routePickerView?.tintColor = self.foregroundColor
+        self.dislikeButton.tintColor = self.foregroundColor
+        self.likeButton.tintColor = self.foregroundColor
+        self.addToPlaylistButton.tintColor = self.foregroundColor
+        self.lyricsButton.tintColor = self.foregroundColor
+        self.upNextButton.tintColor = self.foregroundColor
+        
+        self.dismissBarButtonItem.tintColor = secondaryColor
+        self.moreBarButtonItem.tintColor = secondaryColor
+        self.navigationController?.navigationBar.titleTextAttributes?[.foregroundColor] = secondaryColor
+        
+        self.upNextHeaderLabel.textColor = secondaryColor
+        
+        self.songPlaybackTimeSlider.maximumTrackTintColor = secondaryColor
+        self.songPlaybackTimeRemainingLabel.textColor = secondaryColor*/
+    }
+    
+    func setupSongImageViews(previous: MusicAPI.Song?, current: MusicAPI.Song?, next: MusicAPI.Song?) {
+        var previousSongImageViewIndex = songImageViews.firstIndex(where: { $0.0 == "previous" })
+        if previousSongImageViewIndex == nil {
+            let previousSongImageView = UIImageView()
+            previousSongImageView.layer.cornerRadius = 10
+            previousSongImageView.layer.masksToBounds = true
+            view.addSubview(previousSongImageView)
+            previousSongImageView.translatesAutoresizingMaskIntoConstraints = false
+            previousSongImageView.widthAnchor.constraint(equalTo: previousSongImageView.heightAnchor).isActive = true
+            previousSongImageView.topAnchor.constraint(equalTo: baseSongImageView.topAnchor, constant: 40).isActive = true
+            previousSongImageView.bottomAnchor.constraint(equalTo: baseSongImageView.bottomAnchor, constant: -40).isActive = true
+            previousSongImageView.trailingAnchor.constraint(equalTo: baseSongImageView.leadingAnchor, constant: -40).isActive = true
+            previousSongImageViewIndex = songImageViews.count
+            songImageViews.append(("previous", previousSongImageView))
+        }
+        
+        if let previous = previous {
+            songImageViews[previousSongImageViewIndex!].1.sd_setImage(with: URL(string: previous.image.url), placeholderImage: UIImage(named: "musicCoverImagePlaceholder"))
+        } else {
+            songImageViews[previousSongImageViewIndex!].1.image = UIImage(named: "musicCoverImagePlaceholder")
+        }
+        
+        var currentSongImageViewIndex = songImageViews.firstIndex(where: { $0.0 == "current" })
+        if currentSongImageViewIndex == nil {
+            let currentSongImageView = UIImageView()
+            currentSongImageView.layer.cornerRadius = 10
+            currentSongImageView.layer.masksToBounds = true
+            view.addSubview(currentSongImageView)
+            currentSongImageView.translatesAutoresizingMaskIntoConstraints = false
+            currentSongImageView.widthAnchor.constraint(equalTo: currentSongImageView.heightAnchor).isActive = true
+            currentSongImageView.topAnchor.constraint(equalTo: baseSongImageView.topAnchor).isActive = true
+            currentSongImageView.bottomAnchor.constraint(equalTo: baseSongImageView.bottomAnchor).isActive = true
+            currentSongImageView.leadingAnchor.constraint(equalTo: baseSongImageView.leadingAnchor).isActive = true
+            currentSongImageView.trailingAnchor.constraint(equalTo: baseSongImageView.trailingAnchor).isActive = true
+            currentSongImageViewIndex = songImageViews.count
+            songImageViews.append(("current", currentSongImageView))
+        }
+        
+        if let current = current {
+            songImageViews[currentSongImageViewIndex!].1.sd_setImage(with: URL(string: current.image.url), placeholderImage: UIImage(named: "musicCoverImagePlaceholder")) { image, _, _, _ in
+                if let image = image {
+                    self.updateColors(for: image)
+                }
+            }
+        } else {
+            songImageViews[currentSongImageViewIndex!].1.image = UIImage(named: "musicCoverImagePlaceholder")
+        }
+        
+        var nextSongImageViewIndex = songImageViews.firstIndex(where: { $0.0 == "next" })
+        if nextSongImageViewIndex == nil {
+            let nextSongImageView = UIImageView()
+            nextSongImageView.layer.cornerRadius = 10
+            nextSongImageView.layer.masksToBounds = true
+            view.addSubview(nextSongImageView)
+            nextSongImageView.translatesAutoresizingMaskIntoConstraints = false
+            nextSongImageView.widthAnchor.constraint(equalTo: nextSongImageView.heightAnchor).isActive = true
+            nextSongImageView.topAnchor.constraint(equalTo: baseSongImageView.topAnchor, constant: 40).isActive = true
+            nextSongImageView.bottomAnchor.constraint(equalTo: baseSongImageView.bottomAnchor, constant: -40).isActive = true
+            nextSongImageView.leadingAnchor.constraint(equalTo: baseSongImageView.trailingAnchor, constant: 40).isActive = true
+            nextSongImageViewIndex = songImageViews.count
+            songImageViews.append(("next", nextSongImageView))
+        }
+        
+        if let next = next {
+            songImageViews[nextSongImageViewIndex!].1.sd_setImage(with: URL(string: next.image.url), placeholderImage: UIImage(named: "musicCoverImagePlaceholder"))
+        } else {
+            songImageViews[nextSongImageViewIndex!].1.image = UIImage(named: "musicCoverImagePlaceholder")
+        }
+    }
+    
+    var trackPanGestureRecognizer: UIPanGestureRecognizer!
+    
+    var previousTrackAnimator: UIViewPropertyAnimator!
+    var nextTrackAnimator: UIViewPropertyAnimator!
+    
+    var animatingTrackPan = false
+    
+    func setupTrackPanning() {
+        trackPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(trackPan(_:)))
+        
+        view.addGestureRecognizer(trackPanGestureRecognizer)
+    }
+        
+    @objc func trackPan(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: sender.view!)
+        
+        if sender.state == .began {
+            animatingTrackPan = true
+            previousTrackAnimator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 1.0)
+            nextTrackAnimator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 1.0)
+            
+            let previousSongImageViewIndex = self.songImageViews.firstIndex(where: { $0.0 == "previous" })
+            let currentSongImageViewIndex = self.songImageViews.firstIndex(where: { $0.0 == "current" })
+            let nextSongImageViewIndex = self.songImageViews.firstIndex(where: { $0.0 == "next" })
+            
+            let previousSongImageViewAverageColor = self.songImageViews[previousSongImageViewIndex!].1.image!.averageColor!
+            
+            previousTrackAnimator.addAnimations {
+                NSLayoutConstraint.deactivate(self.view.constraints.filter({ constraint in
+                    if
+                        let firstItem = constraint.firstItem as? UIView,
+                        [
+                            self.songImageViews[previousSongImageViewIndex!].1,
+                            self.songImageViews[currentSongImageViewIndex!].1,
+                            self.songImageViews[nextSongImageViewIndex!].1
+                        ].contains(firstItem)
+                    {
+                        return true
+                    }
+                    if
+                        let secondItem = constraint.secondItem as? UIView,
+                        [
+                            self.songImageViews[previousSongImageViewIndex!].1,
+                            self.songImageViews[currentSongImageViewIndex!].1,
+                            self.songImageViews[nextSongImageViewIndex!].1
+                        ].contains(secondItem)
+                    {
+                        return true
+                    }
+                    return false
+                }))
+                
+                self.songImageViews[previousSongImageViewIndex!].1.translatesAutoresizingMaskIntoConstraints = false
+                self.songImageViews[previousSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[previousSongImageViewIndex!].1.heightAnchor).isActive = true
+                self.songImageViews[previousSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor).isActive = true
+                self.songImageViews[previousSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor).isActive = true
+                self.songImageViews[previousSongImageViewIndex!].1.leadingAnchor.constraint(equalTo: self.baseSongImageView.leadingAnchor).isActive = true
+                self.songImageViews[previousSongImageViewIndex!].1.trailingAnchor.constraint(equalTo: self.baseSongImageView.trailingAnchor).isActive = true
+                
+                self.updateColors(for: previousSongImageViewAverageColor)
+                
+                self.songImageViews[currentSongImageViewIndex!].1.translatesAutoresizingMaskIntoConstraints = false
+                self.songImageViews[currentSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[currentSongImageViewIndex!].1.heightAnchor).isActive = true
+                self.songImageViews[currentSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor, constant: 40).isActive = true
+                self.songImageViews[currentSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor, constant: -40).isActive = true
+                self.songImageViews[currentSongImageViewIndex!].1.leadingAnchor.constraint(equalTo: self.baseSongImageView.trailingAnchor, constant: 40).isActive = true
+                
+                self.songImageViews[nextSongImageViewIndex!].1.translatesAutoresizingMaskIntoConstraints = false
+                self.songImageViews[nextSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[nextSongImageViewIndex!].1.heightAnchor).isActive = true
+                self.songImageViews[nextSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor, constant: 80).isActive = true
+                self.songImageViews[nextSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor, constant: -80).isActive = true
+                self.songImageViews[nextSongImageViewIndex!].1.leadingAnchor.constraint(equalTo: self.baseSongImageView.trailingAnchor, constant: 80).isActive = true
+                
+                self.view.layoutIfNeeded()
+            }
+            
+            previousTrackAnimator.addCompletion { _ in
+                let previousSongImageViewIndex = self.songImageViews.firstIndex(where: { $0.0 == "previous" })
+                let currentSongImageViewIndex = self.songImageViews.firstIndex(where: { $0.0 == "current" })
+                let nextSongImageViewIndex = self.songImageViews.firstIndex(where: { $0.0 == "next" })
+                
+                NSLayoutConstraint.deactivate(self.view.constraints.filter({ constraint in
+                    if
+                        let firstItem = constraint.firstItem as? UIView,
+                        [
+                            self.songImageViews[previousSongImageViewIndex!].1,
+                            self.songImageViews[currentSongImageViewIndex!].1,
+                            self.songImageViews[nextSongImageViewIndex!].1
+                        ].contains(firstItem)
+                    {
+                        return true
+                    }
+                    if
+                        let secondItem = constraint.secondItem as? UIView,
+                        [
+                            self.songImageViews[previousSongImageViewIndex!].1,
+                            self.songImageViews[currentSongImageViewIndex!].1,
+                            self.songImageViews[nextSongImageViewIndex!].1
+                        ].contains(secondItem)
+                    {
+                        return true
+                    }
+                    return false
+                }))
+                
+                self.songImageViews[previousSongImageViewIndex!].1.translatesAutoresizingMaskIntoConstraints = false
+                self.songImageViews[currentSongImageViewIndex!].1.translatesAutoresizingMaskIntoConstraints = false
+                self.songImageViews[nextSongImageViewIndex!].1.translatesAutoresizingMaskIntoConstraints = false
+                
+                if !self.previousTrackAnimator.isReversed {
+                    self.songImageViews[previousSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[previousSongImageViewIndex!].1.heightAnchor).isActive = true
+                    self.songImageViews[previousSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor).isActive = true
+                    self.songImageViews[previousSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor).isActive = true
+                    self.songImageViews[previousSongImageViewIndex!].1.leadingAnchor.constraint(equalTo: self.baseSongImageView.leadingAnchor).isActive = true
+                    self.songImageViews[previousSongImageViewIndex!].1.trailingAnchor.constraint(equalTo: self.baseSongImageView.trailingAnchor).isActive = true
+                    
+                    self.updateColors(for: self.songImageViews[previousSongImageViewIndex!].1.image!)
+                    
+                    self.songImageViews[currentSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[currentSongImageViewIndex!].1.heightAnchor).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor, constant: 40).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor, constant: -40).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.leadingAnchor.constraint(equalTo: self.baseSongImageView.trailingAnchor, constant: 40).isActive = true
+                    
+                    self.songImageViews[nextSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[nextSongImageViewIndex!].1.heightAnchor).isActive = true
+                    self.songImageViews[nextSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor, constant: 80).isActive = true
+                    self.songImageViews[nextSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor, constant: -80).isActive = true
+                    self.songImageViews[nextSongImageViewIndex!].1.leadingAnchor.constraint(equalTo: self.baseSongImageView.trailingAnchor, constant: 80).isActive = true
+                } else {
+                    self.songImageViews[previousSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[previousSongImageViewIndex!].1.heightAnchor).isActive = true
+                    self.songImageViews[previousSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor, constant: 40).isActive = true
+                    self.songImageViews[previousSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor, constant: -40).isActive = true
+                    self.songImageViews[previousSongImageViewIndex!].1.trailingAnchor.constraint(equalTo: self.baseSongImageView.leadingAnchor, constant: -40).isActive = true
+                    
+                    self.songImageViews[currentSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[currentSongImageViewIndex!].1.heightAnchor).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.leadingAnchor.constraint(equalTo: self.baseSongImageView.leadingAnchor).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.trailingAnchor.constraint(equalTo: self.baseSongImageView.trailingAnchor).isActive = true
+                    
+                    self.updateColors(for: self.songImageViews[currentSongImageViewIndex!].1.image!)
+                    
+                    self.songImageViews[nextSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[nextSongImageViewIndex!].1.heightAnchor).isActive = true
+                    self.songImageViews[nextSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor, constant: 40).isActive = true
+                    self.songImageViews[nextSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor, constant: -40).isActive = true
+                    self.songImageViews[nextSongImageViewIndex!].1.leadingAnchor.constraint(equalTo: self.baseSongImageView.trailingAnchor, constant: 40).isActive = true
+                }
+                
+                self.view.layoutIfNeeded()
+            }
+            
+            let nextSongImageViewAverageColor = self.songImageViews[nextSongImageViewIndex!].1.image!.averageColor!
+            
+            nextTrackAnimator.addAnimations {
+                NSLayoutConstraint.deactivate(self.view.constraints.filter({ constraint in
+                    if
+                        let firstItem = constraint.firstItem as? UIView,
+                        [
+                            self.songImageViews[previousSongImageViewIndex!].1,
+                            self.songImageViews[currentSongImageViewIndex!].1,
+                            self.songImageViews[nextSongImageViewIndex!].1
+                        ].contains(firstItem)
+                    {
+                        return true
+                    }
+                    if
+                        let secondItem = constraint.secondItem as? UIView,
+                        [
+                            self.songImageViews[previousSongImageViewIndex!].1,
+                            self.songImageViews[currentSongImageViewIndex!].1,
+                            self.songImageViews[nextSongImageViewIndex!].1
+                        ].contains(secondItem)
+                    {
+                        return true
+                    }
+                    return false
+                }))
+                
+                self.songImageViews[nextSongImageViewIndex!].1.translatesAutoresizingMaskIntoConstraints = false
+                self.songImageViews[nextSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[nextSongImageViewIndex!].1.heightAnchor).isActive = true
+                self.songImageViews[nextSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor).isActive = true
+                self.songImageViews[nextSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor).isActive = true
+                self.songImageViews[nextSongImageViewIndex!].1.leadingAnchor.constraint(equalTo: self.baseSongImageView.leadingAnchor).isActive = true
+                self.songImageViews[nextSongImageViewIndex!].1.trailingAnchor.constraint(equalTo: self.baseSongImageView.trailingAnchor).isActive = true
+                
+                self.updateColors(for: nextSongImageViewAverageColor)
+                
+                self.songImageViews[currentSongImageViewIndex!].1.translatesAutoresizingMaskIntoConstraints = false
+                self.songImageViews[currentSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[currentSongImageViewIndex!].1.heightAnchor).isActive = true
+                self.songImageViews[currentSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor, constant: 40).isActive = true
+                self.songImageViews[currentSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor, constant: -40).isActive = true
+                self.songImageViews[currentSongImageViewIndex!].1.trailingAnchor.constraint(equalTo: self.baseSongImageView.leadingAnchor, constant: -40).isActive = true
+                
+                self.songImageViews[previousSongImageViewIndex!].1.translatesAutoresizingMaskIntoConstraints = false
+                self.songImageViews[previousSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[previousSongImageViewIndex!].1.heightAnchor).isActive = true
+                self.songImageViews[previousSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor, constant: 80).isActive = true
+                self.songImageViews[previousSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor, constant: -80).isActive = true
+                self.songImageViews[previousSongImageViewIndex!].1.trailingAnchor.constraint(equalTo: self.baseSongImageView.leadingAnchor, constant: -80).isActive = true
+                
+                self.view.layoutIfNeeded()
+            }
+            
+            nextTrackAnimator.addCompletion { _ in
+                let previousSongImageViewIndex = self.songImageViews.firstIndex(where: { $0.0 == "previous" })
+                let currentSongImageViewIndex = self.songImageViews.firstIndex(where: { $0.0 == "current" })
+                let nextSongImageViewIndex = self.songImageViews.firstIndex(where: { $0.0 == "next" })
+                
+                NSLayoutConstraint.deactivate(self.view.constraints.filter({ constraint in
+                    if
+                        let firstItem = constraint.firstItem as? UIView,
+                        [
+                            self.songImageViews[previousSongImageViewIndex!].1,
+                            self.songImageViews[currentSongImageViewIndex!].1,
+                            self.songImageViews[nextSongImageViewIndex!].1
+                        ].contains(firstItem)
+                    {
+                        return true
+                    }
+                    if
+                        let secondItem = constraint.secondItem as? UIView,
+                        [
+                            self.songImageViews[previousSongImageViewIndex!].1,
+                            self.songImageViews[currentSongImageViewIndex!].1,
+                            self.songImageViews[nextSongImageViewIndex!].1
+                        ].contains(secondItem)
+                    {
+                        return true
+                    }
+                    return false
+                }))
+                
+                self.songImageViews[previousSongImageViewIndex!].1.translatesAutoresizingMaskIntoConstraints = false
+                self.songImageViews[currentSongImageViewIndex!].1.translatesAutoresizingMaskIntoConstraints = false
+                self.songImageViews[nextSongImageViewIndex!].1.translatesAutoresizingMaskIntoConstraints = false
+                
+                if !self.nextTrackAnimator.isReversed {
+                    self.songImageViews[nextSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[nextSongImageViewIndex!].1.heightAnchor).isActive = true
+                    self.songImageViews[nextSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor).isActive = true
+                    self.songImageViews[nextSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor).isActive = true
+                    self.songImageViews[nextSongImageViewIndex!].1.leadingAnchor.constraint(equalTo: self.baseSongImageView.leadingAnchor).isActive = true
+                    self.songImageViews[nextSongImageViewIndex!].1.trailingAnchor.constraint(equalTo: self.baseSongImageView.trailingAnchor).isActive = true
+                    
+                    self.updateColors(for: nextSongImageViewAverageColor)
+                    
+                    self.songImageViews[currentSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[currentSongImageViewIndex!].1.heightAnchor).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor, constant: 40).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor, constant: -40).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.trailingAnchor.constraint(equalTo: self.baseSongImageView.leadingAnchor, constant: -40).isActive = true
+                    
+                    self.songImageViews[previousSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[previousSongImageViewIndex!].1.heightAnchor).isActive = true
+                    self.songImageViews[previousSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor, constant: 80).isActive = true
+                    self.songImageViews[previousSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor, constant: -80).isActive = true
+                    self.songImageViews[previousSongImageViewIndex!].1.trailingAnchor.constraint(equalTo: self.baseSongImageView.leadingAnchor, constant: -80).isActive = true
+                } else {
+                    self.songImageViews[previousSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[previousSongImageViewIndex!].1.heightAnchor).isActive = true
+                    self.songImageViews[previousSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor, constant: 40).isActive = true
+                    self.songImageViews[previousSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor, constant: -40).isActive = true
+                    self.songImageViews[previousSongImageViewIndex!].1.trailingAnchor.constraint(equalTo: self.baseSongImageView.leadingAnchor, constant: -40).isActive = true
+                    
+                    self.songImageViews[currentSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[currentSongImageViewIndex!].1.heightAnchor).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.leadingAnchor.constraint(equalTo: self.baseSongImageView.leadingAnchor).isActive = true
+                    self.songImageViews[currentSongImageViewIndex!].1.trailingAnchor.constraint(equalTo: self.baseSongImageView.trailingAnchor).isActive = true
+                    
+                    self.updateColors(for: self.songImageViews[currentSongImageViewIndex!].1.image!)
+                    
+                    self.songImageViews[nextSongImageViewIndex!].1.widthAnchor.constraint(equalTo: self.songImageViews[nextSongImageViewIndex!].1.heightAnchor).isActive = true
+                    self.songImageViews[nextSongImageViewIndex!].1.topAnchor.constraint(equalTo: self.baseSongImageView.topAnchor, constant: 40).isActive = true
+                    self.songImageViews[nextSongImageViewIndex!].1.bottomAnchor.constraint(equalTo: self.baseSongImageView.bottomAnchor, constant: -40).isActive = true
+                    self.songImageViews[nextSongImageViewIndex!].1.leadingAnchor.constraint(equalTo: self.baseSongImageView.trailingAnchor, constant: 40).isActive = true
+                }
+                
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        if translation.x < 0 {
+            if previousTrackAnimator.isRunning {
+                previousTrackAnimator.fractionComplete = 0
+                previousTrackAnimator.pauseAnimation()
+            }
+            nextTrackAnimator.fractionComplete = min(max(0, translation.x * -1 / 300), 1)
+        } else if translation.x > 0 {
+            if nextTrackAnimator.isRunning {
+                nextTrackAnimator.fractionComplete = 0
+                nextTrackAnimator.pauseAnimation()
+            }
+            previousTrackAnimator.fractionComplete = min(max(0, translation.x / 300), 1)
+        } else {
+            if nextTrackAnimator.isRunning {
+                nextTrackAnimator.fractionComplete = 0
+                nextTrackAnimator.pauseAnimation()
+            }
+            if previousTrackAnimator.isRunning {
+                previousTrackAnimator.fractionComplete = 0
+                previousTrackAnimator.pauseAnimation()
+            }
+        }
+        
+        if sender.state == .ended {
+            animatingTrackPan = false
+            if translation.x < -150 {
+                previousTrackAnimator.stopAnimation(true)
+                nextTrackAnimator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            } else if translation.x > 150 {
+                nextTrackAnimator.stopAnimation(true)
+                previousTrackAnimator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            } else {
+                nextTrackAnimator.isReversed = true
+                nextTrackAnimator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+                previousTrackAnimator.isReversed = true
+                previousTrackAnimator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            }
+        } else if sender.state == .cancelled {
+            animatingTrackPan = false
+            nextTrackAnimator.isReversed = true
+            nextTrackAnimator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+            previousTrackAnimator.isReversed = true
+            previousTrackAnimator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupTrackPanning()
+        setupSongImageViews(previous: nil, current: nil, next: nil)
         
         routePickerView = AVRoutePickerView(frame: outputPickerView.frame)
         routePickerView?.tintColor = .label
@@ -224,7 +701,8 @@ class NowPlayingViewController: UIViewController {
             guard let song = MusicAPI.shared.currentlyPlayingSong() else {
                 self.songTitleLabel.text = "Not Playing"
                 self.songArtistLabel.text = ""
-                self.songImageView.image = UIImage(named: "musicCoverImagePlaceholder")
+                self.setupSongImageViews(previous: nil, current: nil, next: nil)
+//                self.songImageView.image = UIImage(named: "musicCoverImagePlaceholder")
                 
                 self.updateColors(for: UIImage(named: "musicCoverImagePlaceholder")!)
                 
@@ -254,11 +732,13 @@ class NowPlayingViewController: UIViewController {
             
             self.songTitleLabel.text = song.title
             self.songArtistLabel.text = song.artists.joined(separator: ", ")
-            self.songImageView.sd_setImage(with: URL(string: song.image.url), placeholderImage: UIImage(named: "musicCoverImagePlaceholder")) { image, _, _, _ in
-                if let image = image {
-                    self.updateColors(for: image)
-                }
-            }
+            
+            self.setupSongImageViews(previous: MusicAPI.shared.previousSong(), current: song, next: MusicAPI.shared.upNextSong())
+//            self.songImageView.sd_setImage(with: URL(string: song.image.url), placeholderImage: UIImage(named: "musicCoverImagePlaceholder")) { image, _, _, _ in
+//                if let image = image {
+//                    self.updateColors(for: image)
+//                }
+//            }
             
             self.songPauseButton.isEnabled = true
             self.songPlayButton.isEnabled = true

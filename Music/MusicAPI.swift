@@ -1150,6 +1150,10 @@ public class MusicAPI: NSObject {
         return self.songQueue.count > 1 ? self.songQueue[1] : nil
     }
     
+    public func previousSong() -> Song? {
+        return self.previousSongQueue.last
+    }
+    
     public func stop() {
         if self.local_song_queue.count != 0 {
             if self.local_song_queue.count > 1 {
